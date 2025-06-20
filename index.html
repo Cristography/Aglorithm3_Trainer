@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Trainer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Algorithm 3 Trainer</h1>
+        <h4>By Crist Yaghjian and a lot of AI :)</h4>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'strassen2x2')">Strassen 2x2</button>
+            <button class="tab-button" onclick="openTab(event, 'strassen4x4')">Strassen 4x4</button>
+            <button class="tab-button" onclick="openTab(event, 'lup3x3')">LUP 3x3</button>
+            <button class="tab-button" onclick="openTab(event, 'lup4x4')">LUP 4x4</button>
+            <button class="tab-button" onclick="openTab(event, 'fft4')">FFT 4-Point</button>
+            <button class="tab-button" onclick="openTab(event, 'fft8')">FFT 8-Point</button>
+        </div>
+
+        <!-- Strassen 2x2 Matrix Section -->
+        <div id="strassen2x2" class="tab-content active-content">
+            <h2>Strassen 2x2 Matrix Multiplication</h2>
+            <div class="matrix-input-area">
+                <div class="matrix-group">
+                    <h3>Matrix A (2x2)</h3>
+                    <div id="matrixA_strassen2x2" class="matrix-grid grid-2x2"></div>
+                </div>
+                <div class="matrix-group">
+                    <h3>Matrix B (2x2)</h3>
+                    <div id="matrixB_strassen2x2" class="matrix-grid grid-2x2"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button onclick="fillRandomStrassenValues(2)">Random Values</button>
+                <button onclick="calculateStrassen(2)">Calculate</button>
+            </div>
+            <div class="results-area">
+                <h3>Results (2x2):</h3>
+                <div id="p_values_strassen2x2" class="p-values"></div>
+                <div id="c_values_strassen2x2_sub" class="c-values">
+                    <!-- For 2x2, C sub-matrices are just numbers, shown with final C -->
+                </div>
+                <div id="c_matrix_strassen2x2_final" class="c-values">
+                    <h4>Matrix C (Result):</h4>
+                    <div id="matrixC_strassen2x2_output" class="matrix-grid grid-2x2 output-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strassen 4x4 Matrix Section -->
+        <div id="strassen4x4" class="tab-content">
+            <h2>Strassen 4x4 Matrix Multiplication</h2>
+            <div class="matrix-input-area">
+                <div class="matrix-group">
+                    <h3>Matrix A (4x4)</h3>
+                    <div id="matrixA_strassen4x4" class="matrix-grid grid-4x4"></div>
+                </div>
+                <div class="matrix-group">
+                    <h3>Matrix B (4x4)</h3>
+                    <div id="matrixB_strassen4x4" class="matrix-grid grid-4x4"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button onclick="fillRandomStrassenValues(4)">Random Values</button>
+                <button onclick="calculateStrassen(4)">Calculate</button>
+            </div>
+            <div class="results-area">
+                <h3>Results (4x4):</h3>
+                <div id="p_values_strassen4x4" class="p-values"></div>
+                <div id="c_values_strassen4x4_sub" class="c-values">
+                    <!-- C sub-matrices will be displayed here by JS -->
+                </div>
+                <div id="c_matrix_strassen4x4_final" class="c-values">
+                    <h4>Matrix C (Result):</h4>
+                    <div id="matrixC_strassen4x4_output" class="matrix-grid grid-4x4 output-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LUP 3x3 Section -->
+        <div id="lup3x3" class="tab-content">
+            <h2>LUP Decomposition & Solver (3x3)</h2>
+            <div class="equation-input-area">
+                <div class="matrix-group">
+                    <h3>Matrix A (3x3)</h3>
+                    <div id="matrixA_lup3x3" class="matrix-grid grid-3x3"></div>
+                </div>
+                <div class="vector-group">
+                    <h3>Vector B (3x1)</h3>
+                    <div id="vectorB_lup3x3" class="vector-grid grid-3x1"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button onclick="fillRandomLUPValues(3)">Random Values</button>
+                <button onclick="calculateLUP(3)">Solve Ax = B</button>
+            </div>
+            <div class="results-area" id="results_lup3x3">
+                <div id="error_lup3x3" class="error-message"></div>
+                <div id="P_matrix_lup3x3" class="lup-output-group"></div>
+                <div id="L_matrix_lup3x3" class="lup-output-group"></div>
+                <div id="U_matrix_lup3x3" class="lup-output-group"></div>
+                <div id="PB_vector_lup3x3" class="lup-output-group"></div>
+                <div id="Y_vector_lup3x3" class="lup-output-group"></div>
+                <div id="X_vector_lup3x3" class="lup-output-group"></div>
+            </div>
+        </div>
+
+        <!-- LUP 4x4 Section -->
+        <div id="lup4x4" class="tab-content">
+            <h2>LUP Decomposition & Solver (4x4)</h2>
+            <div class="equation-input-area">
+                <div class="matrix-group">
+                    <h3>Matrix A (4x4)</h3>
+                    <div id="matrixA_lup4x4" class="matrix-grid grid-4x4"></div>
+                </div>
+                <div class="vector-group">
+                    <h3>Vector B (4x1)</h3>
+                    <div id="vectorB_lup4x4" class="vector-grid grid-4x1"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button onclick="fillRandomLUPValues(4)">Random Values</button>
+                <button onclick="calculateLUP(4)">Solve Ax = B</button>
+            </div>
+            <div class="results-area" id="results_lup4x4">
+                <div id="error_lup4x4" class="error-message"></div>
+                <div id="P_matrix_lup4x4" class="lup-output-group"></div>
+                <div id="L_matrix_lup4x4" class="lup-output-group"></div>
+                <div id="U_matrix_lup4x4" class="lup-output-group"></div>
+                <div id="PB_vector_lup4x4" class="lup-output-group"></div>
+                <div id="Y_vector_lup4x4" class="lup-output-group"></div>
+                <div id="X_vector_lup4x4" class="lup-output-group"></div>
+            </div>
+        </div>
+
+        <!-- FFT 4-Point Section -->
+        <div id="fft4" class="tab-content">
+            <h2>Fast Fourier Transform (DIT) - 4 Point</h2>
+            <div class="fft-input-area">
+                <h3>Input Samples (x[n]) - Real part only</h3>
+                <div id="fft_input_4" class="fft-input-grid"></div>
+            </div>
+            <div class="controls">
+                <button onclick="fillRandomFFTValues(4)">Random Values</button>
+                <button onclick="calculateFFT(4)">Compute FFT</button>
+            </div>
+            <div class="results-area" id="results_fft4">
+                <h4>Output X[k] (Complex: Real + j Imaginary):</h4>
+                <div id="fft_output_4" class="fft-output-display"></div>
+                <div id="fft_steps_4" class="fft-steps-display"></div>
+            </div>
+        </div>
+
+        <!-- FFT 8-Point Section -->
+        <div id="fft8" class="tab-content">
+            <h2>Fast Fourier Transform (DIT) - 8 Point</h2>
+            <div class="fft-input-area">
+                <h3>Input Samples (x[n]) - Real part only</h3>
+                <div id="fft_input_8" class="fft-input-grid"></div>
+            </div>
+            <div class="controls">
+                <button onclick="fillRandomFFTValues(8)">Random Values</button>
+                <button onclick="calculateFFT(8)">Compute FFT</button>
+            </div>
+            <div class="results-area" id="results_fft8">
+                <h4>Output X[k] (Complex: Real + j Imaginary):</h4>
+                <div id="fft_output_8" class="fft-output-display"></div>
+                <div id="fft_steps_8" class="fft-steps-display"></div>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

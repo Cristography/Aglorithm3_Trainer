@@ -1,0 +1,792 @@
+/* --- CSS Custom Properties (Variables) --- */
+:root {
+    --font-primary: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-monospace: 'Fira Code', 'Courier New', Courier, monospace;
+
+    /* Color Palette - Modern & Clean */
+    --color-primary: #007bff;
+    /* Main accent color (Blue) */
+    --color-primary-dark: #0056b3;
+    --color-primary-light: #66aaff;
+    --color-primary-hover: #0069d9;
+
+    --color-secondary: #6c757d;
+    /* Gray for secondary text/elements */
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #17a2b8;
+    /* A teal/cyan */
+
+    --color-bg-body: #f4f6f9;
+    /* Light gray background for the page */
+    --color-bg-container: #ffffff;
+    /* White for main content areas/cards */
+    --color-bg-alt: #f8f9fa;
+    /* Slightly off-white for alternate sections or hover */
+    --color-bg-input: #ffffff;
+    --color-bg-input-disabled: #e9ecef;
+    --color-bg-output-cell: #e9ecef;
+    /* Background for read-only output cells */
+
+    --color-text-dark: #212529;
+    /* Dark gray for main text */
+    --color-text-medium: #495057;
+    /* Medium gray */
+    --color-text-light: #6c757d;
+    /* Light gray for less important text, placeholders */
+    --color-text-on-primary: #ffffff;
+    /* Text on primary-colored backgrounds */
+    --color-text-link: var(--color-primary);
+    --color-text-heading: #343a40;
+    --color-text-error: var(--color-danger);
+    --color-text-success: var(--color-success);
+    --color-text-monospace: #333;
+    /* For code/formula text */
+
+
+    --color-border: #dee2e6;
+    /* Standard border color */
+    --color-border-input: #ced4da;
+    --color-border-input-focus: var(--color-primary-light);
+    --color-border-accent: var(--color-primary);
+    --color-border-subtle: #e9ecef;
+
+
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    /* Softer shadow */
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.12);
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    --transition-fast: 0.15s ease-in-out;
+    --transition-medium: 0.25s ease-in-out;
+}
+
+/* --- Global Resets & Base Styles --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    /* Base font size */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    background-color: var(--color-bg-body);
+    color: var(--color-text-medium);
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* --- Container --- */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    /* Increased max-width */
+    background-color: var(--color-bg-container);
+    padding: var(--spacing-xl) var(--spacing-xxl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- Headings --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--color-text-heading);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    /* Reduce this value */
+    color: var(--color-primary);
+}
+
+h2 {
+    /* Section titles */
+    font-size: 1.75rem;
+    /* ~28px */
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-border-subtle);
+    color: var(--color-text-dark);
+}
+
+h3 {
+    /* Group titles within sections */
+    font-size: 1.375rem;
+    /* ~22px */
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-dark);
+}
+
+h4 {
+    text-align: center;
+    font-size: 1.125rem;
+    margin-top: var(--spacing-xs);
+    /* Reduce this value */
+    margin-bottom: calc(var(--spacing-sm) * 2);
+    /* Optional: reduce if needed */
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+h1+h4 {
+    margin-top: 0;
+}
+
+h5 {
+    font-size: 1rem;
+    color: var(--color-text-medium);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+}
+
+
+/* --- Tabs --- */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.tab-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
+    border-bottom: 3px solid transparent;
+    margin-right: var(--spacing-xs);
+    margin-bottom: -2px;
+    /* Align with container border */
+    white-space: nowrap;
+}
+
+.tab-button:hover {
+    color: var(--color-primary);
+}
+
+.tab-button.active {
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom-color: var(--color-primary);
+}
+
+.tab-content {
+    display: none;
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background-color: var(--color-bg-alt);
+    /* Slightly different background for content */
+    animation: fadeIn 0.4s ease-out;
+}
+
+.tab-content.active-content {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Input Areas & Groups --- */
+.matrix-input-area,
+.equation-input-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.matrix-group,
+.vector-group,
+.fft-input-area {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-container);
+    /* White background for these cards */
+    box-shadow: var(--shadow-sm);
+}
+
+.fft-input-area h3 {
+    text-align: center;
+}
+
+.vector-group {
+    min-width: 180px;
+    text-align: center;
+}
+
+.vector-group h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* --- Matrix & Vector Grids --- */
+.matrix-grid,
+.vector-grid {
+    display: grid;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background-color: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-subtle);
+}
+
+/* Specific Grid Sizes */
+.grid-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+    width: 140px;
+}
+
+.grid-3x3 {
+    grid-template-columns: repeat(3, 1fr);
+    width: 210px;
+}
+
+.grid-4x4 {
+    grid-template-columns: repeat(4, 1fr);
+    width: 280px;
+}
+
+.vector-grid.grid-3x1 {
+    grid-template-rows: repeat(3, 1fr);
+    width: 65px;
+    margin: var(--spacing-sm) auto 0 auto;
+}
+
+.vector-grid.grid-4x1 {
+    grid-template-rows: repeat(4, 1fr);
+    width: 65px;
+    margin: var(--spacing-sm) auto 0 auto;
+}
+
+
+/* Input cells */
+.matrix-grid input[type="number"],
+.vector-grid input[type="number"],
+.fft-input-grid input[type="number"] {
+    width: 100%;
+    height: 45px;
+    padding: var(--spacing-sm);
+    text-align: center;
+    border: 1px solid var(--color-border-input);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: var(--font-monospace);
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-input);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+
+.matrix-grid input[type="number"]::-webkit-outer-spin-button,
+.matrix-grid input[type="number"]::-webkit-inner-spin-button,
+.vector-grid input[type="number"]::-webkit-outer-spin-button,
+.vector-grid input[type="number"]::-webkit-inner-spin-button,
+.fft-input-grid input[type="number"]::-webkit-outer-spin-button,
+.fft-input-grid input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.matrix-grid input[type="number"]:focus,
+.vector-grid input[type="number"]:focus,
+.fft-input-grid input[type="number"]:focus {
+    border-color: var(--color-border-input-focus);
+    box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb, 0, 123, 255), 0.25);
+    /* Fallback if --color-primary-rgb not set */
+    outline: none;
+}
+
+/* If you want to use --color-primary-rgb, define it in :root, e.g., --color-primary-rgb: 0,123,255; */
+
+
+/* Output cells (read-only) */
+.matrix-grid .cell-value,
+.vector-grid .cell-value {
+    background-color: var(--color-bg-output-cell);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: var(--color-text-medium);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    height: 45px;
+    font-family: var(--font-monospace);
+    font-size: 0.95rem;
+}
+
+/* --- FFT Input Grid --- */
+.fft-input-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+}
+
+.fft-input-grid input[type="number"] {
+    width: 70px;
+    /* Fixed width for FFT inputs */
+}
+
+/* --- Controls --- */
+.controls {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.controls button {
+    padding: 0.75rem 1.5rem;
+    /* ~12px 24px */
+    margin: var(--spacing-sm) 0.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.9375rem;
+    /* ~15px */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.controls button:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.controls button:active {
+    background-color: var(--color-primary-dark);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.controls button:first-of-type {
+    /* "Random Values" button */
+    background-color: var(--color-secondary);
+}
+
+.controls button:first-of-type:hover {
+    background-color: #5a6268;
+    /* Darken secondary */
+}
+
+.controls button:first-of-type:active {
+    background-color: #545b62;
+}
+
+
+/* --- Results Area Common Styles --- */
+.results-area {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background-color: var(--color-bg-container);
+    /* White background */
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.p-values,
+.c-values,
+.lup-output-group {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, #f5f7fa, #eef2f7);
+    /* Subtle gradient */
+    border-radius: var(--radius-md);
+    border-left: 5px solid var(--color-primary-light);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.p-values p,
+.c-values p,
+.lup-output-group p {
+    /* Styling for P1 = ... etc. */
+    margin: var(--spacing-sm) 0;
+    font-family: var(--font-monospace);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-text-monospace);
+    word-break: break-word;
+}
+
+.p-values p>span,
+/* P1, C11 etc labels */
+.c-values p>span {
+    font-weight: 600;
+    margin-right: var(--spacing-xs);
+    color: var(--color-primary);
+}
+
+.output-grid {
+    /* For Strassen & LUP final C matrix display and vector outputs */
+    margin: var(--spacing-md) auto;
+    border: 2px solid var(--color-primary) !important;
+    padding: var(--spacing-md) !important;
+    background-color: var(--color-bg-container) !important;
+    /* Ensure it's white */
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Strassen 4x4 intermediate sub-matrix display */
+.sub-matrix-display {
+    display: inline-block;
+    border: 1px solid var(--color-border-accent);
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm) var(--spacing-xs);
+    vertical-align: middle;
+    background-color: var(--color-bg-container);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.sub-matrix-display table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.sub-matrix-display td {
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-sm);
+    text-align: center;
+    min-width: 40px;
+    font-size: 0.9rem;
+    font-family: var(--font-monospace);
+    color: var(--color-text-dark);
+}
+
+.error-message {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: #f8d7da;
+    /* Light red */
+    border: 1px solid #f5c6cb;
+    border-left: 5px solid var(--color-danger);
+    border-radius: var(--radius-sm);
+    color: #721c24;
+    /* Dark red text */
+    font-weight: 500;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+
+/* --- FFT Specific Results Styling --- */
+.fft-output-display {
+    /* Container for FFT results table */
+    margin-bottom: var(--spacing-lg);
+}
+
+.fft-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+    font-family: var(--font-monospace);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    /* For border-radius on table */
+}
+
+.fft-results-table th,
+.fft-results-table td {
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+}
+
+.fft-results-table th {
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-dark);
+    font-weight: 600;
+    text-align: center;
+}
+
+.fft-results-table td {
+    color: var(--color-text-medium);
+    background-color: var(--color-bg-container);
+}
+
+.fft-results-table tbody tr:nth-child(even) td {
+    background-color: #fbfdff;
+    /* Very light striping */
+}
+
+.fft-results-table td:first-child,
+.fft-results-table th:first-child {
+    text-align: center;
+}
+
+/* k index */
+.fft-results-table td:nth-child(n+3) {
+    text-align: right;
+}
+
+/* Numerical values right-aligned */
+
+
+.fft-steps-display h5 {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-dark);
+}
+
+.fft-steps-pre {
+    /* Styling for the <pre> tag in FFT steps */
+    background-color: #2d333b;
+    /* Dark background for code */
+    color: #cdd9e5;
+    /* Light text */
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    font-family: var(--font-monospace);
+    font-size: 0.85em;
+    border: 1px solid #444c56;
+    line-height: 1.5;
+    white-space: pre;
+}
+
+.fft-steps-notice {
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-sm);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .container {
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .tabs {
+        justify-content: flex-start;
+    }
+
+    .tab-button {
+        padding: var(--spacing-sm) 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    .matrix-input-area,
+    .equation-input-area {
+        grid-template-columns: 1fr;
+        /* Stack on smaller screens */
+    }
+
+    .matrix-group,
+    .vector-group {
+        max-width: none;
+        /* Allow full width when stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-md);
+    }
+
+    .container {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    h1 {
+        font-size: 1.875rem;
+    }
+
+    /* ~30px */
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* ~24px */
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    /* ~20px */
+
+    .tabs {
+        flex-direction: column;
+        align-items: stretch;
+        border-bottom: none;
+    }
+
+    .tab-button {
+        width: 100%;
+        margin-bottom: var(--spacing-xs);
+        text-align: left;
+        border-bottom: 2px solid var(--color-border);
+    }
+
+    .tab-button.active {
+        border-bottom-color: var(--color-primary);
+        background-color: var(--color-bg-alt);
+    }
+
+    .tab-content {
+        border-radius: var(--radius-md);
+        border-top: 1px solid var(--color-border);
+        /* Add top border as tab bottom is removed */
+    }
+
+    .fft-input-grid input[type="number"] {
+        width: 60px;
+    }
+
+    .controls button {
+        width: calc(100% - var(--spacing-sm));
+        /* Full width buttons stack nicely */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+
+    /* Slightly smaller base on very small screens */
+    .container {
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-md);
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.15rem;
+    }
+
+    h4 {
+        font-size: 1rem;
+    }
+
+    .matrix-grid input[type="number"],
+    .vector-grid input[type="number"],
+    .matrix-grid .cell-value,
+    .vector-grid .cell-value,
+    .fft-input-grid input[type="number"] {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .grid-2x2 {
+        width: 120px;
+    }
+
+    .grid-3x3 {
+        width: 170px;
+    }
+
+    .grid-4x4 {
+        width: 220px;
+    }
+
+    .vector-grid.grid-3x1,
+    .vector-grid.grid-4x1 {
+        width: 55px;
+    }
+
+    .fft-input-grid {
+        gap: var(--spacing-xs);
+    }
+
+    .fft-input-grid input[type="number"] {
+        width: calc(33.33% - var(--spacing-xs)*2);
+        min-width: 50px;
+    }
+
+    .p-values,
+    .c-values,
+    .lup-output-group {
+        padding: var(--spacing-sm);
+    }
+
+    .p-values p,
+    .c-values p,
+    .lup-output-group p {
+        font-size: 0.85rem;
+    }
+
+    .fft-results-table {
+        font-size: 0.8rem;
+    }
+
+    .fft-results-table th,
+    .fft-results-table td {
+        padding: 0.4rem 0.6rem;
+    }
+}
